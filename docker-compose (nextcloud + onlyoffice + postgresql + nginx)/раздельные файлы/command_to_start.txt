@@ -1,0 +1,1 @@
+docker-compose -f docker-compose-nextcloud.yml -f docker-compose-postgresql.yml up -d

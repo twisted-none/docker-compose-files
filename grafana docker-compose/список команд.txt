@@ -1,0 +1,14 @@
+mkdir -p /opt/prometheus_stack/prometheus,grafana
+
+cd /opt/prometheus_stack
+
+vi docker-compose.yml # записать файл docker-compose.yml который я отправил
+
+
+vi prometheus/prometheus.yml # записать файл prometheus.yml который я отправил
+
+
+vi grafana.ini # записать файл grafana.ini который я отправил
+
+
+docker-compose up -d
