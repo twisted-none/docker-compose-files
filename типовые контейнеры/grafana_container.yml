@@ -1,0 +1,18 @@
+grafana:
+    image: grafana/grafana
+    user: root
+    # depends_on:
+    #  - prometheus если используем prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+      - ./grafana.ini:/etc/grafana/grafana.ini
+    container_name: grafana
+    hostname: grafana
+    restart: unless-stopped
+    environment:
+      TZ: "Europe/Moscow"
+    networks:
+      - default

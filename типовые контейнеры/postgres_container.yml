@@ -1,0 +1,12 @@
+postgresql-server:
+    container_name: postgres
+    image: postgres:15.2
+    restart: always
+    volumes:
+      - ./postgresql_server:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ncuser
+      POSTGRES_USER: ncuser
+      POSTGRES_DB: ncdb
+    ports:
+      - "5432:5432"

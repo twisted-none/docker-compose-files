@@ -1,0 +1,13 @@
+onlyoffice-document-server:
+    container_name: onlyoffice-document
+    image: onlyoffice/documentserver:7.3.3
+    restart: always
+    environment:
+      - JWT_ENABLED=false
+    expose:
+      - '80'
+      - '443'
+    volumes:
+      - ./document_data:/var/www/onlyoffice/Data
+      - ./document_log:/var/log/onlyoffice
+	

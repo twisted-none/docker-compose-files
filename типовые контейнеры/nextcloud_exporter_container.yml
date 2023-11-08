@@ -1,0 +1,13 @@
+nextcloud_exporter:
+    image: xperimental/nextcloud-exporter
+    container_name: nextcloud_exporter
+    environment:
+      NEXTCLOUD_SERVER: "localhost:80"
+      NEXTCLOUD_USERNAME: "admin"
+      NEXTCLOUD_PASSWORD: "admin"
+      TZ: "Europe/Moscow"
+    ports:
+      - 9205:9205
+    restart: unless-stopped
+    networks:
+      - default
