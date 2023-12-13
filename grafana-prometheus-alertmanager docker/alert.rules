@@ -1,11 +1,14 @@
 groups:
-- name: node-exporter
+- name: test
   rules:
-  - alert: InstanceDown
+  - alert: node
     expr: up{job="node"} == 0
-    for: 10s
     labels:
-      severity: page
-    annotations:
-      summary: "Instance {{ .instance }} down"
-      description: "{{ .instance }} of job {{ .job }} has been down for more than 5 minutes."
+      severity: critical
+      notify: email
+
+  - alert: grafana
+    expr: up{job="grafana"} == 0
+    labels:
+      severity: warning
+      notify: telegram
