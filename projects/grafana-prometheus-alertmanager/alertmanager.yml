@@ -1,0 +1,21 @@
+global:
+  resolve_timeout: 1m # Не меняем, чтобы завершенные алерты очищались нормально
+
+route:
+  group_by: ['alertname']
+  group_wait: 5s # Уменьшено с 30s до 5s
+  group_interval: 10s # Уменьшено с 5m до 10s
+  repeat_interval: 1m # Уменьшено с 1h до 1m
+  receiver: 'telegram-receiver'
+
+receivers:
+  - name: 'telegram-receiver'
+    telegram_configs:
+      - bot_token: ${TG_BOT_TOKEN}
+        chat_id: ${CHAT_ID}
+        message: |
+          🚨 *Alert:* {{ .CommonAnnotations.summary }}
+          *Description:* {{ .CommonAnnotations.description }}
+          *Details:* {{ range .Alerts }}
+          - Log Entry: `{{ .Annotations.value }}`
+          {{ end }}

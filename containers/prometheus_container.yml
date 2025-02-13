@@ -1,0 +1,14 @@
+prometheus:
+  image: prom/prometheus:latest
+  container_name: prometheus
+  ports:
+    - "9090:9090"
+  environment:
+  - TZ=Europe/Moscow
+  volumes:
+    - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    - ./prometheus/alert.rules:/etc/prometheus/alert.rules  # Подключение файла alert.rules
+  depends_on:
+    - alertmanager
+  env_file:
+    - .env

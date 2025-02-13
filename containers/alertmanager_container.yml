@@ -1,0 +1,11 @@
+alertmanager:
+  image: prom/alertmanager:latest
+  container_name: alertmanager
+  ports:
+    - "9093:9093"
+  command: 
+    - '--config.file=/etc/alertmanager/alertmanager.yml'
+    - '--storage.path=/alertmanager' 
+    - '--web.external-url=http://127.0.0.1:9093'      
+  volumes:
+    - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml

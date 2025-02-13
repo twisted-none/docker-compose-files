@@ -1,0 +1,9 @@
+promtail:
+  image: grafana/promtail:latest
+  container_name: promtail
+  environment:
+  - TZ=Europe/Moscow
+  volumes:
+    - ./app/logs:/var/log/ #bot Логи
+    - ./promtail:/etc/promtail  # Конфигурация Promtail
+  command: -config.file=/etc/promtail/promtail-config.yaml

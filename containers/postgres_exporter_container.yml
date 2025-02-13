@@ -1,0 +1,13 @@
+postgres_exporter:
+  image: wrouesnel/postgres_exporter 
+  container_name: postgres_exporter
+  environment:
+    DATA_SOURCE_NAME : "ncdb"
+    DATA_SOURCE_USER : "ncuser"
+    DATA_SOURCE_PASS : "ncuser"
+    TZ: "Europe/Moscow"
+  ports:
+    - 9116:9116
+  restart: unless-stopped
+  networks:
+    - default

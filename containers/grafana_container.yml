@@ -1,0 +1,29 @@
+grafana:
+  image: grafana/grafana
+  user: root
+  # depends_on: - прописываем, от каких контейнеров должна зависеть графана, например - prometheus
+  
+  ports:
+    - 3000:3000 # выставляем нужный нам внешний порт
+  
+  volumes:
+    - ./grafana:/var/lib/grafana # если хотим чтобы дата хранилась в папке здесь
+    - grafana_data:/var/lib/grafana # или чтобы она хранилась в volume самого докера (выбрать 1 из вариантов)
+
+    - ./grafana/provisioning/:/etc/grafana/provisioning/ # если используем автоматическую загрузку каких-то настроек
+    - ./grafana.ini:/etc/grafana/grafana.ini # если используем конфиг файл
+  
+  container_name: grafana # имя контейнера
+  hostname: grafana # имя хоста
+  restart: unless-stopped # при ошибке всегда рестартится пока не остановим сами
+  
+  environment:
+    TZ: "Europe/Moscow" # часовой пояс - москва
+    GF_AUTH_ANONYMOUS_ENABLED: "true" # разрешает анонимным пользователям заходить в графану
+    GF_AUTH_ANONYMOUS_ORG_ROLE: "Editor" # выдает анонимным пользователям роль "Редактор" (есть Viewer только для просмотра и Admin для полных прав)
+    GF_SECURITY_ADMIN_USER: "admin" # устанавливает админ username
+    GF_SECURITY_ADMIN_PASSWORD: "admin" # устанавливает админ пароль
+    GF_PATHS_PROVISIONING: "/etc/grafana/provisioning" # автозагрузка дашбордов и источников данных
+
+  networks:
+    - default

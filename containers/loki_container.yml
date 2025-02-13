@@ -1,0 +1,11 @@
+loki:
+  image: grafana/loki:latest
+  container_name: loki
+  ports:
+    - "3100:3100"
+  environment:
+  - TZ=Europe/Moscow
+  volumes:
+    - loki-data:/loki  # Сохранение данных Loki
+    - ./loki:/etc/loki  # Путь к конфигурационному файлу
+  command: -config.file=/etc/loki/loki-config.yaml  # Указываем правильный путь к конфигу
